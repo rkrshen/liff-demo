@@ -10,7 +10,7 @@ onMounted(() => {
     .then(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
-        liff.login();
+        // liff.login();
         liff.getProfile().then((profile) => {
           console.log(profile.displayName);
           console.log(profile.userId);
