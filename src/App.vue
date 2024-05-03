@@ -11,7 +11,11 @@ onMounted(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
         // liff.login();
+        
       }
+      console.log(liff.getOS())
+      console.log(liff.getLanguage())
+      console.log(liff.getVersion())
     })
     .catch((err) => {
       console.log(err.code, err.message);
