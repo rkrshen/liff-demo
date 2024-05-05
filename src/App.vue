@@ -8,17 +8,23 @@ onMounted(() => {
   liff
     .init({ liffId: '2004824985-x3R0k5ow' })
     .then(() => {
-      if (!liff.isLoggedIn()) {
-        console.log('not login');
-        liff.login();
-      } else {
-        liff.getProfile().then((profile) => {
+      // if (!liff.isLoggedIn()) {
+      //   console.log('not login');
+      //   liff.login();
+      // } else {
+      //   liff.getProfile().then((profile) => {
+      //     console.log('displayName', profile.displayName);
+      //     console.log('userId', profile.userId);
+      //     console.log('pictureUrl', profile.pictureUrl);
+      //     console.log('statusMessage', profile.statusMessage);
+      //   });
+      // }
+      liff.getProfile().then((profile) => {
           console.log('displayName', profile.displayName);
           console.log('userId', profile.userId);
           console.log('pictureUrl', profile.pictureUrl);
           console.log('statusMessage', profile.statusMessage);
         });
-      }
       console.log(liff.getOS())
       console.log(liff.getLanguage())
       console.log(liff.getVersion())
