@@ -2,8 +2,9 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import liff from '@line/liff'
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 
+const mainProfile = ref({})
 onMounted(() => {
   liff
     .init({ liffId: '2004824985-x3R0k5ow' })
@@ -19,12 +20,7 @@ onMounted(() => {
       //     console.log('statusMessage', profile.statusMessage);
       //   });
       // }
-      liff.getProfile().then((profile) => {
-          console.log('displayName', profile.displayName);
-          console.log('userId', profile.userId);
-          console.log('pictureUrl', profile.pictureUrl);
-          console.log('statusMessage', profile.statusMessage);
-        });
+      liff.getProfile().then((profile) => mainProfile.value = profile);
       console.log(liff.getOS())
       console.log(liff.getLanguage())
       console.log(liff.getVersion())
