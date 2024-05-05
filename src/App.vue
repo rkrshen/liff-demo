@@ -6,18 +6,18 @@ import { onMounted } from 'vue';
 
 onMounted(() => {
   liff
-    .init({ liffId: '2004770604-V5QbpB3Q' })
+    .init({ liffId: '2004824985-x3R0k5ow' })
     .then(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
-        // liff.login();
+        liff.login();
+      } else {
         liff.getProfile().then((profile) => {
-          console.log(profile.displayName);
-          console.log(profile.userId);
-          console.log(profile.pictureUrl);
-          console.log(profile.statusMessage);
+          console.log('displayName', profile.displayName);
+          console.log('userId', profile.userId);
+          console.log('pictureUrl', profile.pictureUrl);
+          console.log('statusMessage', profile.statusMessage);
         });
-        
       }
       console.log(liff.getOS())
       console.log(liff.getLanguage())
