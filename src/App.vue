@@ -36,10 +36,10 @@ const sendMsg=()=>{
     },
   ])
   .then(() => {
-    console.log('message sent');
+    alert('message sent');
   })
   .catch((err) => {
-    console.log('error', err);
+    alert('error', err);
   });
 }
 
