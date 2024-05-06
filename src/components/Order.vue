@@ -47,12 +47,16 @@ const logout = () =>{
     liff.closeWindow();
 }
 
-const profile = ref({})
+const profile = ref({
+    displayName: '',
+    pictureUrl: '',
+})
 
 
 onMounted(() => {
     liff.getProfile().then((prof) => {
-        profile.value = prof
+        profile.value.displayName = prof.displayName
+        profile.value.pictureUrl = prof.pictureUrl ?? ''
     });
 })
 </script>
