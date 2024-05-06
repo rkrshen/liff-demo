@@ -37,7 +37,7 @@ const sendOrder = async() => {
     await liff.sendMessages([
         {
             type: 'text',
-            text: `您訂購的餐點為：${itemToText}，總金額為：${total.value} 元。`,
+            text: `您訂購的餐點為：${itemToText.value}，總金額為：${total.value} 元。`,
         },
     ])
     logout()
