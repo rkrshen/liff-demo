@@ -9,15 +9,20 @@ const order = ref({
     amount: 0
 })
 
-const meals = ref([
+interface Meal {
+    name: string
+    price: number
+}
+
+const meals: Meal[] = [
     { name: '漢堡', price: 50 },
     { name: '薯條', price: 30 },
-    { name: '可樂', price: 20 }
-])
+    { name: '可樂', price: 20 },
+]
 
 const total = computed(() => {
     return order.value.items.reduce((acc, item) => {
-        const price = meals.value.find(meal => meal.name === item).price
+        const price = meals.find(meal => meal.name === item)?.price ?? 0
         return acc + price
     }, 0)
 })
