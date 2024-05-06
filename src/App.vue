@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import Order from './components/Order.vue'
 import liff from '@line/liff'
 import { onMounted, ref } from 'vue';
+
+
+let context:any = null
+let contextKey:string[]
 
 onMounted(() => {
   liff
@@ -10,7 +14,7 @@ onMounted(() => {
     .then(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
-        liff.login();
+        // liff.login();
       } else {
         console.log(liff.getOS())
         console.log(liff.getLanguage())
@@ -30,24 +34,6 @@ onMounted(() => {
     });
 })
 
-let context:any = null
-let contextKey:string[]
-
-const errorMsg = ref('')
-const sendMsg = () =>{
-  liff.sendMessages([
-    {
-      type: 'text',
-      text: 'Hello, World!',
-    },
-  ])
-  .then(() => {
-    alert('message sent');
-  })
-  .catch((err) => {
-    errorMsg.value= err
-  });
-}
 const logout = () =>{
   liff.logout();
   liff.closeWindow();
@@ -56,17 +42,16 @@ const logout = () =>{
 </script>
 
 <template>
-  <div id="app"></div>
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-    <a @click="sendMsg">點我傳送訊息</a>
+  <div id="app">
+    <Order />
     <a @click="logout">登出</a>
-    <span v-if="errorMsg">{{ errorMsg }}</span>
-    <table>
+    <table v-if="context !== null">
       <tr v-for="item in contextKey">
         <td>{{ item }}</td>
         <td>{{ context[item] }}</td>
       </tr>
     </table>
+  </div>
 </template>
 
 <style>
@@ -74,8 +59,6 @@ const logout = () =>{
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #fff;
 }
 </style>
