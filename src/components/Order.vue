@@ -37,10 +37,19 @@ const sendOrder = async() => {
     await liff.sendMessages([
         {
             type: 'text',
-            text: `您訂購的餐點為：${itemToText.value}，總金額為：${total.value} 元。`,
+            text: `我這次訂購的餐點為：${itemToText.value}，總金額為：${total.value} 元。`,
         },
     ])
     logout()
+}
+
+const shareOrder = async() => {
+    await liff.shareTargetPicker([
+        {
+            type: 'text',
+            text: `我這次訂購的餐點為：${itemToText.value}，總金額為：${total.value} 元。`,
+        },
+    ])
 }
 
 const logout = () =>{
@@ -96,7 +105,10 @@ const modelValue: any = defineModel()
                 </td>
             </tr>
         </table>
-        <a @click="sendOrder">送出訂單</a>
+        <div class="footer">
+            <a class="button" @click="sendOrder">送出訂單</a>
+            <a class="button" @click="shareOrder">分享我的訂單</a>
+        </div>
     </div>
 </template>
 
@@ -105,5 +117,19 @@ const modelValue: any = defineModel()
         width: 100px;
         height: 100px;
         border-radius: 50%;
+    }
+    .footer {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .button {
+        display: inline-block;
+        padding: 6px 10px;
+        background-color: #10B980;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
     }
 </style>
