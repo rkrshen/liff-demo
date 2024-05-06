@@ -21,12 +21,15 @@ onMounted(() => {
           console.log(profile.pictureUrl);
           console.log(profile.statusMessage);
         });
+        context = liff.getContext()
       }
     })
     .catch((err) => {
       console.log(err.code, err.message);
     });
 })
+
+let context = null
 
 const errorMsg = ref('')
 const sendMsg = () =>{
@@ -56,6 +59,7 @@ const logout = () =>{
     <a @click="sendMsg">點我傳送訊息</a>
     <a @click="logout">登出</a>
     <span v-if="errorMsg">{{ errorMsg }}</span>
+    <span>context: {{ context }}</span>
 </template>
 
 <style>
