@@ -10,7 +10,7 @@ onMounted(() => {
     .then(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
-        // liff.login();
+        liff.login();
       } else {
         console.log(liff.getOS())
         console.log(liff.getLanguage())
