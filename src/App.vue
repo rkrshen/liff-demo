@@ -17,6 +17,8 @@ let userData:UserData = {
     pictureUrl: ''
 }
 
+const show = ref(false)
+
 onMounted(async() => {
   await liff
     .init({ liffId: '2004827358-P3mE3j8E' })
@@ -29,7 +31,7 @@ onMounted(async() => {
     .catch((err) => {
       console.log(err.code, err.message);
     });
-  liff.getProfile()
+  await liff.getProfile()
     .then((prof) => {
       userData.displayName = prof.displayName
       userData.pictureUrl = prof.pictureUrl ?? ''
@@ -37,11 +39,12 @@ onMounted(async() => {
     .catch((err) => {
       console.log(err.code, err.message);
     });
+  show.value = true
 })
 </script>
 
 <template>
-  <div id="app">
+  <div id="app" v-if="show">
     <Order v-model="userData" />
     <table v-if="context !== null">
       <tr v-for="item in contextKey">

@@ -53,18 +53,13 @@ interface UserData {
     pictureUrl: string
 }
 
-interface UserData {
-    displayName: string;
-    pictureUrl: string;
-}
-
 const modelValue: any = defineModel()
 </script>
 
 <template>
     <div>
         <h1>點餐系統</h1>
-        <img :src="modelValue.pictureUrl" alt="profile picture">
+        <img class="profile_pic" :src="modelValue.pictureUrl" alt="profile picture">
         <table>
             <tr>
                 <td>
@@ -79,7 +74,7 @@ const modelValue: any = defineModel()
                     <label for="phone">電話：</label>
                 </td>
                 <td>
-                    <input type="text" v-model="order.phone" placeholder="電話">
+                    <input type="tel" v-model="order.phone" placeholder="電話">
                 </td>
             </tr>
             <tr>
@@ -104,3 +99,11 @@ const modelValue: any = defineModel()
         <a @click="sendOrder">送出訂單</a>
     </div>
 </template>
+
+<style scoped>
+    .profile_pic {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+</style>
