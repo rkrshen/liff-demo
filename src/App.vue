@@ -41,9 +41,11 @@ const sendMsg = () =>{
   })
   .catch((err) => {
     errorMsg.value= err
-    liff.logout();
-    liff.closeWindow();
   });
+}
+const logout = () =>{
+  liff.logout();
+  liff.closeWindow();
 }
 
 </script>
@@ -52,6 +54,7 @@ const sendMsg = () =>{
   <div id="app"></div>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
     <a @click="sendMsg">點我傳送訊息</a>
+    <a @click="logout">登出</a>
     <span v-if="errorMsg">{{ errorMsg }}</span>
 </template>
 
