@@ -32,7 +32,7 @@ const itemToText = computed(() => {
     return order.value.items.join('、')
 })
 
-const sendOrder = async() => {
+const sendOrder = async () => {
     order.value.amount = total.value
     await liff.sendMessages([
         {
@@ -43,16 +43,123 @@ const sendOrder = async() => {
     logout()
 }
 
-const shareOrder = async() => {
+const shareOrder = async () => {
     await liff.shareTargetPicker([
         {
             type: 'text',
             text: `我這次訂購的餐點為：${itemToText.value}，總金額為：${total.value} 元。`,
         },
+        {
+            type: 'flex',
+            altText: 'This is a Flex Message',
+            contents: {
+                "type": "bubble",
+                "hero": {
+                    "type": "image",
+                    "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
+                    "size": "full",
+                    "aspectRatio": "20:13",
+                    "aspectMode": "cover",
+                    "action": {
+                        "type": "uri",
+                        "label": "Go",
+                        "uri": "http://linecorp.com/"
+                    }
+                },
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "Brown Cafe",
+                            "weight": "bold",
+                            "size": "xl"
+                        },
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "margin": "lg",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "box",
+                                    "layout": "baseline",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "餐點",
+                                            "color": "#aaaaaa",
+                                            "size": "sm",
+                                            "flex": 1
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": "漢堡、薯條、可樂",
+                                            "wrap": true,
+                                            "color": "#666666",
+                                            "size": "sm",
+                                            "flex": 5
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "box",
+                                    "layout": "baseline",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "金額",
+                                            "color": "#aaaaaa",
+                                            "size": "sm",
+                                            "flex": 1
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": "100元",
+                                            "wrap": true,
+                                            "color": "#666666",
+                                            "size": "sm",
+                                            "flex": 5
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "footer": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "button",
+                            "style": "link",
+                            "height": "sm",
+                            "action": {
+                                "type": "uri",
+                                "label": "前往訂餐",
+                                "uri": "https://liff.line.me/2004827358-P3mE3j8E"
+                            }
+                        },
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "contents": [],
+                            "margin": "sm"
+                        }
+                    ],
+                    "flex": 0
+                }
+            },
+        }
     ])
 }
 
-const logout = () =>{
+const logout = () => {
     liff.logout();
     liff.closeWindow();
 }
@@ -113,23 +220,25 @@ const modelValue: any = defineModel()
 </template>
 
 <style scoped>
-    .profile_pic {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-    }
-    .footer {
-        margin-top: 20px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-    }
-    .button {
-        display: inline-block;
-        padding: 6px 10px;
-        background-color: #10B980;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-    }
+.profile_pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button {
+    display: inline-block;
+    padding: 6px 10px;
+    background-color: #10B980;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
 </style>
