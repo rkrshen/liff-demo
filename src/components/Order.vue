@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import liff from '@line/liff';
-import { ref, onMounted, computed } from 'vue'
+import { ref, defineModel, computed } from 'vue'
+
 
 const order = ref({
     name: '',
@@ -47,31 +48,30 @@ const logout = () =>{
     liff.closeWindow();
 }
 
-const profile = ref({
-    displayName: '',
-    pictureUrl: '',
-})
+interface UserData {
+    displayName: string
+    pictureUrl: string
+}
 
+interface UserData {
+    displayName: string;
+    pictureUrl: string;
+}
 
-onMounted(() => {
-    liff.getProfile().then((prof) => {
-        profile.value.displayName = prof.displayName
-        profile.value.pictureUrl = prof.pictureUrl ?? ''
-    });
-})
+const modelValue: any = defineModel()
 </script>
 
 <template>
     <div>
         <h1>點餐系統</h1>
-        <img :src="profile.pictureUrl" alt="profile picture">
+        <img :src="modelValue.pictureUrl" alt="profile picture">
         <table>
             <tr>
                 <td>
                     <label for="name">姓名：</label>
                 </td>
                 <td>
-                    <p>{{ profile.displayName }}</p>
+                    <p>{{ modelValue.displayName }}</p>
                 </td>
             </tr>
             <tr>

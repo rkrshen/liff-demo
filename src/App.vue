@@ -7,30 +7,37 @@ import { onMounted, ref } from 'vue';
 
 let context:any = null
 let contextKey:string[]
-let userData = ref({})
 
-onMounted(() => {
-  liff
+interface UserData {
+    displayName: string
+    pictureUrl: string
+}
+let userData:UserData = {
+    displayName: '',
+    pictureUrl: ''
+}
+
+onMounted(async() => {
+  await liff
     .init({ liffId: '2004827358-P3mE3j8E' })
     .then(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
-        liff.login();
-      } else {
-        console.log(liff.getOS())
-        console.log(liff.getLanguage())
-        console.log(liff.getVersion())
-        context = liff.getContext()
-        contextKey = Object.keys(context)
-      }
+        // liff.login();
+      } 
+    })
+    .catch((err) => {
+      console.log(err.code, err.message);
+    });
+  liff.getProfile()
+    .then((prof) => {
+      userData.displayName = prof.displayName
+      userData.pictureUrl = prof.pictureUrl ?? ''
     })
     .catch((err) => {
       console.log(err.code, err.message);
     });
 })
-
-
-
 </script>
 
 <template>
