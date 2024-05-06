@@ -41,6 +41,8 @@ const sendMsg = () =>{
   })
   .catch((err) => {
     errorMsg.value= err
+    liff.logout();
+    liff.closeWindow();
   });
 }
 
