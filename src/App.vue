@@ -11,23 +11,17 @@ onMounted(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
         liff.login();
+      } else {
+        console.log(liff.getOS())
+        console.log(liff.getLanguage())
+        console.log(liff.getVersion())
         liff.getProfile().then((profile) => {
           console.log(profile.displayName);
           console.log(profile.userId);
           console.log(profile.pictureUrl);
           console.log(profile.statusMessage);
         });
-        
       }
-      console.log(liff.getOS())
-      console.log(liff.getLanguage())
-      console.log(liff.getVersion())
-      liff.getProfile().then((profile) => {
-        console.log(profile.displayName);
-        console.log(profile.userId);
-        console.log(profile.pictureUrl);
-        console.log(profile.statusMessage);
-      });
     })
     .catch((err) => {
       console.log(err.code, err.message);
