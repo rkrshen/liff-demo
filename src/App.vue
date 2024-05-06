@@ -32,7 +32,6 @@ onMounted(() => {
 
 <template>
   <div id="app"></div>
-    <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
     <RouterLink to="/about">About</RouterLink>
     <RouterView />
