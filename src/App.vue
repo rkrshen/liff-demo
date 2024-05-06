@@ -29,7 +29,7 @@ onMounted(() => {
     });
 })
 
-let context = null
+let context:any = null
 
 const errorMsg = ref('')
 const sendMsg = () =>{
