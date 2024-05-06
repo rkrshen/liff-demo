@@ -31,7 +31,7 @@ onMounted(() => {
 })
 
 let context:any = null
-let contextKey = []
+let contextKey:string[]
 
 const errorMsg = ref('')
 const sendMsg = () =>{
