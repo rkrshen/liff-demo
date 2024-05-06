@@ -6,11 +6,11 @@ import { onMounted } from 'vue';
 
 onMounted(() => {
   liff
-    .init({ liffId: '2004770604-V5QbpB3Q' })
+    .init({ liffId: '2004827358-P3mE3j8E' })
     .then(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
-        liff.login();
+        liff.login({ redirectUri: "https://localhost:5173" });
         liff.getProfile().then((profile) => {
           console.log(profile.displayName);
           console.log(profile.userId);
