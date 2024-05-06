@@ -28,7 +28,7 @@ onMounted(() => {
     });
 })
 
-const sendMsg=()=>{
+const sendMsg = () =>{
   liff.sendMessages([
     {
       type: 'text',
