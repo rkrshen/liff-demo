@@ -14,7 +14,7 @@ onMounted(() => {
     .then(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
-        // liff.login();
+        liff.login();
       } else {
         console.log(liff.getOS())
         console.log(liff.getLanguage())
@@ -59,6 +59,5 @@ const logout = () =>{
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #fff;
 }
 </style>
