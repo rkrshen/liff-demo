@@ -2,7 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import liff from '@line/liff'
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 
 onMounted(() => {
   liff
@@ -28,6 +28,7 @@ onMounted(() => {
     });
 })
 
+const errorMsg = ref('')
 const sendMsg = () =>{
   liff.sendMessages([
     {
@@ -39,7 +40,7 @@ const sendMsg = () =>{
     alert('message sent');
   })
   .catch((err) => {
-    alert('error', err);
+    errorMsg.value= err
   });
 }
 
@@ -49,6 +50,7 @@ const sendMsg = () =>{
   <div id="app"></div>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
     <a @click="sendMsg">點我傳送訊息</a>
+    <span v-if="errorMsg">{{ errorMsg }}</span>
 </template>
 
 <style>
