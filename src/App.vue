@@ -10,7 +10,7 @@ onMounted(() => {
     .then(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
-        liff.login();
+        // liff.login();
       } else {
         console.log(liff.getOS())
         console.log(liff.getLanguage())
@@ -22,6 +22,7 @@ onMounted(() => {
           console.log(profile.statusMessage);
         });
         context = liff.getContext()
+        contextKey = Object.keys(context)
       }
     })
     .catch((err) => {
@@ -30,6 +31,7 @@ onMounted(() => {
 })
 
 let context:any = null
+let contextKey = []
 
 const errorMsg = ref('')
 const sendMsg = () =>{
@@ -59,7 +61,12 @@ const logout = () =>{
     <a @click="sendMsg">點我傳送訊息</a>
     <a @click="logout">登出</a>
     <span v-if="errorMsg">{{ errorMsg }}</span>
-    <span>context: {{ context }}</span>
+    <table>
+      <tr v-for="item in contextKey">
+        <td>{{ item }}</td>
+        <td>{{ context[item] }}</td>
+      </tr>
+    </table>
 </template>
 
 <style>
