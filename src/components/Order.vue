@@ -54,7 +54,7 @@ onMounted(() => {
     liff.getProfile().then((prof) => {
         profile.value = prof
     });
-}),
+})
 </script>
 
 <template>
