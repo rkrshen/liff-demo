@@ -7,6 +7,7 @@ import { onMounted, ref } from 'vue';
 
 let context:any = null
 let contextKey:string[]
+let userData = ref({})
 
 onMounted(() => {
   liff
@@ -19,12 +20,6 @@ onMounted(() => {
         console.log(liff.getOS())
         console.log(liff.getLanguage())
         console.log(liff.getVersion())
-        liff.getProfile().then((profile) => {
-          console.log(profile.displayName);
-          console.log(profile.userId);
-          console.log(profile.pictureUrl);
-          console.log(profile.statusMessage);
-        });
         context = liff.getContext()
         contextKey = Object.keys(context)
       }
@@ -34,17 +29,13 @@ onMounted(() => {
     });
 })
 
-const logout = () =>{
-  liff.logout();
-  liff.closeWindow();
-}
+
 
 </script>
 
 <template>
   <div id="app">
-    <Order />
-    <a @click="logout">登出</a>
+    <Order v-model="userData" />
     <table v-if="context !== null">
       <tr v-for="item in contextKey">
         <td>{{ item }}</td>

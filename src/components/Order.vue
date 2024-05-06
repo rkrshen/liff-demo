@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import liff from '@line/liff';
-import { ref, readonly, computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
 const order = ref({
     name: '',
@@ -31,27 +31,43 @@ const itemToText = computed(() => {
     return order.value.items.join('、')
 })
 
-const sendOrder = () => {
+const sendOrder = async() => {
     order.value.amount = total.value
-    liff.sendMessages([
+    await liff.sendMessages([
         {
             type: 'text',
             text: `您訂購的餐點為：${itemToText}，總金額為：${total.value} 元。`,
         },
     ])
+    logout()
 }
+
+const logout = () =>{
+    liff.logout();
+    liff.closeWindow();
+}
+
+const profile = ref({})
+
+
+onMounted(() => {
+    liff.getProfile().then((prof) => {
+        profile.value = prof
+    });
+}),
 </script>
 
 <template>
     <div>
         <h1>點餐系統</h1>
+        <img :src="profile.pictureUrl" alt="profile picture">
         <table>
             <tr>
                 <td>
                     <label for="name">姓名：</label>
                 </td>
                 <td>
-                    <input type="text" v-model="order.name" placeholder="姓名">
+                    <p>{{ profile.displayName }}</p>
                 </td>
             </tr>
             <tr>
