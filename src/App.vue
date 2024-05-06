@@ -10,7 +10,7 @@ onMounted(() => {
     .then(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
-        liff.login({ redirectUri: "https://localhost:5173" });
+        liff.login();
         liff.getProfile().then((profile) => {
           console.log(profile.displayName);
           console.log(profile.userId);
@@ -22,6 +22,12 @@ onMounted(() => {
       console.log(liff.getOS())
       console.log(liff.getLanguage())
       console.log(liff.getVersion())
+      liff.getProfile().then((profile) => {
+        console.log(profile.displayName);
+        console.log(profile.userId);
+        console.log(profile.pictureUrl);
+        console.log(profile.statusMessage);
+      });
     })
     .catch((err) => {
       console.log(err.code, err.message);
