@@ -10,7 +10,7 @@ onMounted(() => {
     .then(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
-        liff.login();
+        // liff.login();
       } else {
         console.log(liff.getOS())
         console.log(liff.getLanguage())
@@ -28,13 +28,27 @@ onMounted(() => {
     });
 })
 
+const sendMsg=()=>{
+  liff.sendMessages([
+    {
+      type: 'text',
+      text: 'Hello, World!',
+    },
+  ])
+  .then(() => {
+    console.log('message sent');
+  })
+  .catch((err) => {
+    console.log('error', err);
+  });
+}
+
 </script>
 
 <template>
   <div id="app"></div>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-    <RouterLink to="/about">About</RouterLink>
-    <RouterView />
+    <a @click="sendMsg">點我傳送訊息</a>
 </template>
 
 <style>
