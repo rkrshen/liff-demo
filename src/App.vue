@@ -25,7 +25,7 @@ onMounted(async() => {
     .then(() => {
       if (!liff.isLoggedIn()) {
         console.log('not login');
-        // liff.login();
+        liff.login();
       } 
     })
     .catch((err) => {

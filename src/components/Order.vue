@@ -46,10 +46,6 @@ const sendOrder = async () => {
 const shareOrder = async () => {
     await liff.shareTargetPicker([
         {
-            type: 'text',
-            text: `我這次訂購的餐點為：${itemToText.value}，總金額為：${total.value} 元。`,
-        },
-        {
             type: 'flex',
             altText: 'This is a Flex Message',
             contents: {
